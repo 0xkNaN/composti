@@ -8,18 +8,23 @@ var HTTP = axios.create({
 });
 
 export const GET_DATA = async () => {
-  const data = await HTTP.get("/products");
-  return [...data];
+  try {
+    const res = await HTTP.get("/products");
+    const products = res?.data?.products || [];
+    // console.log("#DATA :: ", products);
+    return [...products];
+  } catch (err) {
+    // console.log("#Error :: ", err);
+    return { error: true };
+  }
 };
 
 export const POST_DATA = async (req) => {
   await HTTP.post("/products", req);
-  const data = await GET_DATA();
-  return [...data];
+  return await GET_DATA();
 };
 
 export const DEL_DATA = async (id) => {
   await HTTP.delete("/products", { id });
-  const data = await GET_DATA();
-  return [...data];
+  return await GET_DATA();
 };

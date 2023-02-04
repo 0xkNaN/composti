@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="359px" height="360px" viewBox="0 0 359 360" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group Copy</title>
+    <defs>
+        <linearGradient x1="50%" y1="5.08349038%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#00364F" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#001927" stop-opacity="0.07" offset="100%"></stop>
+        </linearGradient>
+        <path d="M179.5,338 C266.484848,338 337,266.179722 337,179.303434 C337,133.860147 308.93194,106.590187 278.079271,77.8737262 C249.949293,51.69144 220.984775,22 179.5,22 C132.560488,22 105.597188,45.3391604 76.7422612,77.8737262 C52.125362,105.629823 22,139.308076 22,179.303434 C22,266.179722 92.5151519,338 179.5,338 Z" id="path-2"></path>
+        <filter x="-6.8%" y="-6.5%" width="113.7%" height="113.6%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="7" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0.0980392157   0 0 0 0 0.152941176  0 0 0 0.197279283 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="UI-Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-Copy">
+            <path d="M179.43038,360 C278.527042,360 358.860759,278.17943 358.860759,179.206444 C358.860759,127.43561 326.884488,96.3685679 291.735878,63.6536121 C259.689068,33.8256912 226.691516,0 179.43038,0 C125.954986,0 95.2373025,26.5889169 62.3646014,63.6536121 C34.3200326,95.2744817 0,133.642112 0,179.206444 C0,278.17943 80.3337174,360 179.43038,360 Z" id="Oval" fill="url(#linearGradient-1)"></path>
+            <g id="Oval-Copy">
+                <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-2"></use>
+            </g>
+        </g>
+    </g>
+</svg>

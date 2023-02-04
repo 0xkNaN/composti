@@ -141,7 +141,7 @@ const Step2 = ({ code, setCode, codeLoading, setCodeLoading, step, setStep }) =>
   );
 };
 
-const Step3 = ({ categories, setCategories, step, setStep }) => {
+const Step3 = ({ categories, setCategories, step, setStep, navigation }) => {
   const raw = [
     { title: "Category One", id: "category-1" },
     { title: "Category Two", id: "category-2" },
@@ -174,7 +174,11 @@ const Step3 = ({ categories, setCategories, step, setStep }) => {
           ))}
         </View>
 
-        <TouchableRipple style={styles.button} onPress={() => {}}>
+        <TouchableRipple
+          style={styles.button}
+          onPress={() => {
+            navigation.replace("Dashboard", {});
+          }}>
           <Text style={styles.buttonLabel}>Go to your dashboard</Text>
         </TouchableRipple>
       </View>
@@ -193,8 +197,6 @@ const Signup = ({ navigation }) => {
 
   const isGreener = type === "__greener";
   const isComposter = type === "__composter";
-
-  // __reload__;
 
   const sProps = {
     isGreener,

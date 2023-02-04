@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 
 export const NavStack = () => {
   return (
-    <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="Dashboard" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="Signup" component={Signup} />
       <Stack.Screen name="Signin" component={Signin} />
