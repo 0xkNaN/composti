@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { TouchableRipple, Surface, Text } from "react-native-paper";
 
+import { storeAccountData } from "../services/storage";
+
 import AuthStepper from "../components/auth/Stepper";
 import EntryPhone from "../components/Entries/Phone";
 import CodeEntry from "../components/Entries/Code";
@@ -65,7 +67,11 @@ const Step0 = ({ isGreener, isComposter, setType, setStep }) => {
         <TouchableRipple style={styles.buttonTrans}>
           <Text style={styles.buttonTransLabel}>
             Already have an account?{" "}
-            <Text style={styles.buttonTransLabelColor} onPress={() => navigation.navigate("Singin", {})}>
+            <Text
+              style={styles.buttonTransLabelColor}
+              onPress={() => {
+                // navigation.navigate("Singin", {});
+              }}>
               Signin
             </Text>
           </Text>
@@ -81,7 +87,7 @@ const Step1 = ({ phone, setPhone, step, setStep }) => {
       <AuthStepper title="Créer votre compte a fin de commencer à trier et collecter vos déchets organiques" step={step} setStep={setStep} />
 
       <View style={styles.containerTopStepper}>
-        <View style={styles.containerTopStepperInner}>
+        <View style={{ ...styles.containerTopStepperInner, marginBottom: 70 }}>
           <EntryPhone value={phone} setValue={setPhone} />
         </View>
 
@@ -103,7 +109,7 @@ const Step2 = ({ code, setCode, codeLoading, setCodeLoading, step, setStep }) =>
       setTimeout(() => {
         incCode(x);
         if (x === 6) setCodeLoading(false);
-      }, x * 10);
+      }, x * 5);
     });
   };
 
@@ -141,31 +147,26 @@ const Step2 = ({ code, setCode, codeLoading, setCodeLoading, step, setStep }) =>
   );
 };
 
-const Step3 = ({ categories, setCategories, step, setStep, navigation }) => {
+const Step3 = ({ categories, setCategories, step, setStep, navigation, ...props }) => {
   const raw = [
-    { title: "Category One", id: "category-1" },
-    { title: "Category Two", id: "category-2" },
-    { title: "Category Three", id: "category-3" }
-    // { title: "Category Four", id: "category-4" }
+    { title: "Déshets verts", id: "greens" },
+    { title: "Déshets bruns", id: "browns" },
+    { title: "Poop & Fumier", id: "manure" }
   ];
 
-  console.log("#Step3 :: ", categories);
-
   const setCategoriesHandler = (id) => {
-    console.log("#setCategoriesHandler :: ", id);
-
-    if (categories.indexOf(id) > -1) {
-      setCategories((cats) => cats.filter((cId) => cId !== id));
-    } else {
-      setCategories((cats) => [...cats, id]);
-    }
+    if (categories.indexOf(id) > -1) setCategories((cats) => cats.filter((cId) => cId !== id));
+    else setCategories((cats) => [...cats, id]);
   };
 
-  // TODO: navigate to "Dashboard"
+  const onSaveAccountAndGoToDashboard = async (data) => {
+    await storeAccountData(data);
+    navigation.replace("Dashboard", {});
+  };
 
   return (
     <View style={styles.containerWithSteps}>
-      <AuthStepper title="Créer votre compte a fin de commencer à trier et collecter vos déchets organiques" step={step} setStep={setStep} />
+      <AuthStepper title="Choisissez les types de déchets organique que vous souhaitez trier" step={step} setStep={setStep} />
 
       <View style={styles.containerTopStepper}>
         <View style={styles.containerTopStepperInner}>
@@ -177,7 +178,10 @@ const Step3 = ({ categories, setCategories, step, setStep, navigation }) => {
         <TouchableRipple
           style={styles.button}
           onPress={() => {
-            navigation.replace("Dashboard", {});
+            const { type, phone, ...blues } = props;
+            const cats = raw.filter((r) => categories.indexOf(r.id) > -1);
+
+            onSaveAccountAndGoToDashboard({ type, phone, cats });
           }}>
           <Text style={styles.buttonLabel}>Go to your dashboard</Text>
         </TouchableRipple>
@@ -248,19 +252,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingHorizontal: 24,
     paddingBottom: 30
-
-    // TODO: remove this
-    // borderWidth: 1,
-    // borderColor: "red"
   },
   containerTopStepperInner: {
-    marginBottom: 70
-    // height: 100,
-    // marginBottom: 40,
-
-    // TODO: remove this
-    // borderWidth: 1,
-    // borderColor: "green"
+    marginBottom: 20
   },
   logo: {
     marginBottom: 40

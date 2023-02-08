@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-
-import { StyleSheet, View, ActivityIndicator } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { TouchableRipple, Surface, Text } from "react-native-paper";
+
+import CategoryIcon from "../../assets/signup/category.svg";
+import CategorySIcon from "../../assets/signup/categoryS.svg";
 
 const CategoryItem = ({ data, isSelected, hander }) => {
   return (
@@ -12,7 +13,12 @@ const CategoryItem = ({ data, isSelected, hander }) => {
       <Surface elevation={0} style={styles.categoryInner}>
         <View style={styles.categoryContent}>
           <Text style={styles.categoryTitle}>{data.title}</Text>
-          <Text style={styles.categoryDesc}>Lorem ipsum dolor sit amet.{"\n"} Non quas tenetur non soluta nobis.</Text>
+          <View style={styles.categorySubs}>
+            {[1, 2, 3, 4, 5, 6].map((x, idx) => {
+              if (isSelected) return <CategorySIcon key={idx} style={styles.categorySubsIcon} />;
+              return <CategoryIcon key={idx} style={styles.categorySubsIcon} />;
+            })}
+          </View>
         </View>
       </Surface>
     </TouchableRipple>
@@ -42,13 +48,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 20,
     fontWeight: "700",
-    marginBottom: 5
+    marginBottom: 10
   },
-  categoryDesc: {
-    color: "#75828A",
-    fontSize: 13,
-    lineHeight: 16,
-    fontWeight: "400"
+  categorySubs: {
+    flexDirection: "row"
+  },
+  categorySubsIcon: {
+    marginRight: 10
   }
 });
 

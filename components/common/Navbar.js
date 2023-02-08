@@ -13,12 +13,12 @@ import TriSIcon from "../../assets/navbar/triS.svg";
 let tabs = [
   { id: "__home", label: "Collector", Icon: HomeIcon, SIcon: HomeSIcon },
   { id: "__shop", label: "Greenshop", Icon: ShopIcon, SIcon: ShopSIcon },
-  { id: "__trns", label: "Collections", Icon: TransIcon, SIcon: TransSIcon },
+  { id: "__trans", label: "Collections", Icon: TransIcon, SIcon: TransSIcon },
   { id: "__tri", label: "Auto tri", Icon: TriIcon, SIcon: TriSIcon }
 ];
 
-const Navbar = ({ setTab }) => {
-  const tabsList = tabs.map((t) => ({ ...t, selected: false }));
+const Navbar = ({ tab, setTab }) => {
+  const tabsList = tabs.map((t) => ({ ...t, selected: t.id === tab }));
 
   return (
     <View style={styles.container}>
@@ -49,22 +49,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 90,
     paddingHorizontal: 11,
-    backgroundColor: "#ffffff"
-
-    // borderColor: "red",
-    // borderWidth: 1
+    backgroundColor: "#ffffff",
+    borderTopColor: "rgba(0, 0, 0, 0.1)",
+    borderTopWidth: 1
   },
   tab: {
     alignItems: "center"
-
-    // borderColor: "red",
-    // borderWidth: 1
   },
   tabIcon: {
     marginBottom: 5
   },
   tabLabel: {
-    color: "red"
+    color: "#363636",
+    fontSize: 13,
+    fontWeight: "600"
   },
   tabLabelS: {
     color: "green"

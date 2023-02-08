@@ -1,11 +1,12 @@
-import { View, Text } from "react-native";
+import HomeC from "./HomeC";
+import HomeG from "./HomeG";
 
-const HomeTab = () => {
-  return (
-    <View>
-      <Text>Home Tab Content</Text>
-    </View>
-  );
+const Home = (props) => {
+  const type = props?.account?.type;
+  const isGreener = type === "__greener";
+
+  if (isGreener) return <HomeG />;
+  return <HomeC />;
 };
 
-export default HomeTab;
+export default Home;

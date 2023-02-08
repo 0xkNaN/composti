@@ -3,20 +3,22 @@ import { TouchableRipple, Surface, Text } from "react-native-paper";
 
 import NotifIcon from "../../assets/dashboard/notification.svg";
 
-const Topbar = ({ navigation }) => {
+const Topbar = ({ account, navigation, onOpenNotification }) => {
+  const isGreener = account?.type === "__greener";
+
   return (
     <View style={styles.container}>
       <TouchableRipple
         onPress={() => {
-          navigation.replace("Dashboard", {});
+          navigation.replace("Signup", {});
         }}>
         <View style={styles.avatar}>
-          <Text style={styles.avatarLabel}>CT</Text>
+          <Text style={styles.avatarLabel}>{isGreener ? "G" : "C"}</Text>
         </View>
       </TouchableRipple>
       <TouchableRipple
         onPress={() => {
-          navigation.replace("Dashboard", {});
+          onOpenNotification();
         }}>
         <View style={styles.notif}>
           <NotifIcon />
@@ -31,12 +33,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: 90,
+    height: 70,
     paddingHorizontal: 30,
     backgroundColor: "#ffffff"
-
-    // borderColor: "red",
-    // borderWidth: 1
   },
   avatar: {
     alignItems: "center",
